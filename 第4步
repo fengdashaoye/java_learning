@@ -22,11 +22,48 @@ java数据结构：
                          除了"_"或"$"符号以外，变量名不能包含任何特殊字符；不能使用Java语言的关键字，如int、class、public、void、static等
        三，变量的声明：数据类型 变量名 = 值（int i=123）
        四，就算变量没有赋值，当sizeof(变量名) != 0，应该为1，即便没有数据，其在内存中也占有空间。
+       根据变量的作用范围，我们可以将变量分为：成员变量与局部变量
+       成员变量：作为类的成员存在，直接存在于类中
+       局部变量：作为方法的成员存在，存在于方法的参数列表和方法定义中。
+       局部变量在使用前必须被程序员主动初始化，但是成员变量可以被系统提供一个默认的初始值，所以在语法上成员变量定义后可以使用，注意，只是语法
+       上，局部变量定义后赋初值才能使用。
+       例子
+       public class Temp {  
+               int t; //实例变量  
+               public static void main（String args［］）{  
+                  int t=1; //局部变量  
+                  System.out.println（t）; //打印局部变量  
+                  Temp a= new Temp（）; //创建实例  
+                  System.out.println（a.t）; //通过实例访问实例变量  
+               }  
+       }
+       结果为1,0 //成员变量有初始值
+       
+       成员变量可以分为实例变量和静态变量.
+       静态变量之前要加static。
+       静态变量属于静态存储方式，其存储空间为内存中的静态数据区（在 静态存储区内分配存储单元），该区域中的数据在整个程序的运行期间
+       一直占用这些存储空间（在程序整个运行期间都不释放），也可以认为是其内存地址不变，直到整个程序运行结束
+       区别：
+       实例变量属于某个对象的属性，必须创建了实例对象，其中的实例变量才会被分配空间，才能使用这个实例变量。静态变量不属于某个实例对象，
+       而是属于类，所以也称为类变量，只要程序加载了类的字节码，不用创建任何实例对象，静态变量就会被分配空间，静态变量就可以被使用了。
+       实例变量必须创建对象后才可以通过这个对象来使用，静态变量则可以直接使用类名来引用。
+       下面是一个例子
+       public class Temp {  
+             static int t; //类变量，或者说静态变量
+             public static void main（String args［］）{  
+                  System.out.println（t）; //打印类变量  
+                  int t=1; //局部变量  
+                  System.out.println（t）; //打印局部变量  
+                  Temp a= new Temp（）; //创建实例  
+                  System.out.println（a.t）; //通过实例访问实例变量  
+            }  
+      }
+      结果为0,1,0
    B常量：
        一，概述：与变量相对应，常量是不可改变的数据。
        二，作用：常量在程序中通常有两个作用：代表常数，增强程序的可读性。
        三，常量的声明：final 常量名 = 值（在Java编码规范中，要求常量名必须大写），例如：final PI = 3.1415926
-   C数据类型：
+   C基本数据类型：
        之前所说的变量、常量都是指数据，那么我们来详细说说数据的类型。
        Java语言提供了八种基本类型。六种数字类型（四个整数型（默认是int 型），两个浮点型（默认是double 型）），一种字符类型，还有一种布尔型。
        byte:              1Byte
@@ -81,8 +118,53 @@ java数据结构：
             char类型是一个单一的16位Unicode字符；用 ‘’表示一个字符。java 内部使用Unicode字符集。他有一些转义字符，2字节
             最小值是’\u0000’（即为0）；
             最大值是’\uffff’（即为65,535）；可以当整数来用，它的每一个字符都对应一个数字
-            例子 char c1 = 'a';
-   D数据类型的转换
+   例子 char c1 = 'a';
+   D对象数据类型
+      基本数据类型在栈中进行分配，而对象类型在堆中进行分配。
+      例如string对象，Date对象，数组对象等
+      String world = "world";
+      Date time = new Date();
+      基本数据类型 byte short int      long float double char       boolean
+      对象数据类型 Byte Short Integer  Long Float Double Character  Boolean
+      以int为例：int是基本数据类型，Integer是对int进行了封装的一个类。 
+                声明为int的变量不需要实例化，声明为Interger的变量需要实例化
+                Java 提供两种不同的类型：引用类型和原始类型（或内置类型）。Int是java的原始数据类型，Integer是java为int提供的封装类。
+                int 一般做为数值参数就够了 
+                integer 一般做类型转换的时候用的较多
+                基本数据类型比较:
+                if (a==b) 模式
+                对象比较:
+                对象.equals(对象)模式,比较是地址,不是比较内容
+                所以string对象比较时使用equal
+                "=="操作符的作用1、用于基本数据类型的比较2、判断引用是否指向堆内存的同一块地址。
+                equals的作用：用于判断两个变量是否是对同一个对象的引用，即堆中的内容是否相同，返回值为布尔类型
+                例子一：对象不同，内容相同，"=="返回false，equals返回true
+                  String s1 = new String("java");
+                  String s2 = new String("java");
+                  System.out.println(s1==s2);            //false
+                  System.out.println(s1.equals(s2));    //true
+                例子二：同一对象，"=="和equals结果相同
+                  String s1 = new String("java");
+                  String s2 = s1;
+                  System.out.println(s1==s2);            //true
+                  System.out.println(s1.equals(s2));    //true
+   E引用数据类型
+      int a = 1; //基本数据类型
+      Integer b = new Integer(1);// 引用数据类型
+      Integer c = b;// 引用数据类型
+      例如: Point x = new Point (0, 0);
+            Point y = new Point (1, 1);
+            System.out.println(x)
+            System.out.println(y)
+            输出为(0, 0),(1, 1)
+            x = y;
+            x.setlocation(5, 5);
+            System.out.println(x)
+            System.out.println(y)
+            输出为(5, 5),(5, 5)，因为对于对象类型（或者说非基本数据类型），赋值的是对象引用，x和y都引用了同一个对象，x改变，y也改变。
+   F数组数据类型
+      int[] myarray = new int[5];
+   G数据类型的转换
       数据类型转换有两种：
             （1） 自动类型转换：编译器自动完成类型转换，不需要在程序中编写代码； 
              规则：从存储范围小的类型到存储范围大的类型。 
@@ -96,8 +178,17 @@ java数据结构：
             具体规则：double→float→long→int→short(char)→byte. 
             语法格式为：(转换到的类型)需要转换的值
             例如：int  m  =  1234;
-                  byte  b1  =  (byte)m;注意问题:强制类型转换通常都会存储精度的损失，需谨慎。
-(3)java中的语句:
+                 byte  b1  =  (byte)m;注意问题:强制类型转换通常都会存储精度的损失，需谨慎。
+   H运算符
+      算术运算符:+,-,*,/,%
+      赋值运算符:=,+=,-+,*=,/=,%=
+      关系运算符:==,!=,>,<,>=,<=
+      自增/键:++,--
+      逻辑运算符:&&,||,!,^
+(3)java中的语句:与(4)中的控制流关系比较密切。
+   
+   
+     
    
        
        
