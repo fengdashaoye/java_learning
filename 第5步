@@ -1,1 +1,18 @@
-
+5. 学习Java的面向对象编程，包括类、修饰符、引用类型和值类型的区别、成员、方法、访问控制、继承、多态、接口、接口实现。
+顺便学习一下面向对象的基本思想，即对象、消息、封装、继承、多态等，这些通用的内容不是Java特有的。
+(1)类
+  java类的基本构成：包，引入，类，变量，方法，注释
+  package mypackage             //定义包
+  import java.util.*            //引入类
+  
+  public class helloworld{      //定义类
+    private String hello = "helloworld";    //变量
+    public void say(){                        //方法
+        System.out.println(hello);
+    }
+  }
+  
+  包：我们把功能相似的类放在一个包中
+  引入(import):引入类后就能用类中的各种函数功能
+  类：java程序的基本单位
+  变量，函数就不多说了。
