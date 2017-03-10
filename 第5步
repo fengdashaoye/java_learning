@@ -39,10 +39,16 @@
       如Socket等类
   b变量的修饰符
     静态变量 static
+      如果你想要处理的东西是整个程序中唯一的，弄成静态是个好方法。非静态的东西你修改以后只是修改了他自己的数据，但是不会影响其他同类对象的数据。
       静态变量是类中所有对象的共享的变量，是公共的存储单元
-      注意，敲黑板：静态变量一旦赋值，不可改变。
+      标记一个变量为static，则该变量在内存中有不变的位置，相当于全局变量，所有类的实例都访问同一个存储变量区域。
+      对其修改对于所有类的实例来说都是可见和一致的。
+      注意，敲黑板：static变量在编译时已经分配内存，
+      定义static变量是称为静态变量 也是局部变量
+      谁说全局就不能改变值了，除非是 static final声明，就成常量了，就不能改了
     最终变量 final
       其修饰代表常量，不可改变，修饰的同时指出常量的具体取值
+    final static ....代表全局常量
     异失变量 volatile
       如果一个域被volatile修饰，则说明其可能同时被多个线程所控制、修改，即此域不仅仅被当前程序所掌握，在运行过程中极有可能受到其他线程的影响
       volatile String world = "world";
@@ -229,11 +235,86 @@
     }
   }
   carry和carry(int t)区分调用
-(9)接口  
+(9)接口
   java只支持单一继承，为了能够多重继承，我们利用接口实现多重继承
-  接口的含义：
+  一个类只有一个直接父类，但可以有多个接口
+  (a)接口的含义：
+  接口是一系列方法的声明，是一些方法特征的集合，接口只有方法的特征没有方法的实现，所以这些方法能在不同的地方被不同的类实现。
+  而这些实现可以具有不同的行为(功能)
+  关键字:interface
+  接口中定义的方法形式如下，成员变量可以被static,final修饰:
+  public interface 接口名{
+    public 返回值类型 方法名(......)
+    public static int a = 1;
+    public final int b = 2;
+  }
+  (b)一个类要使用某个接口：关键字implements
+    public class myclass implements 接口名{
+    }
+  (c)接口和抽象类的区别
+    (1)抽象类可以提供实现方法，接口不行。java中抽象类可以提供某些方法的部分实现，如果向某个抽象类中填入一个新的方法，那么他所有的
+    子类都可以拥有这个新方法，
+    (2)抽象类只能继承一个，但可以实现多个接口
+    抽象类的实现只能通过子类给出，但一个子类只能继承一个父类，但是一个子类可以实现任意多个接口。
+  (d)接口的特点
+    1、Java接口中的成员变量默认都是public,static,final类型的(都可省略),必须被显示初始化,即接口中的成员变量为常量(大写,单词之间用"_"分隔)
+
+    2、Java接口中的方法默认都是public,abstract类型的(都可省略),没有方法体,不能被实例化
+
+    3、Java接口中只能包含public,static,final类型的成员变量和public,abstract类型的成员方法
+
+    4、接口中没有构造方法,不能被实例化
+
+    5、一个接口不能实现(implements)另一个接口,但它可以继承多个其它的接口
+
+    6、Java接口必须通过类来实现它的抽象方法
+
+    7、当类实现了某个Java接口时,它必须实现接口中的所有抽象方法,否则这个类必须声明为抽象类
+
+    8、不允许创建接口的实例(实例化),但允许定义接口类型的引用变量,该引用变量引用实现了这个接口的类的实例
+
+    9、一个类只能继承一个直接的父类,但可以实现多个接口,间接的实现了多继承.
+(10)接口的实现(实例)
+  interface Flyanimal{     
+   void fly();  
+  }
+  class Insect {     
+   int legnum=6;  
+  } 
+  class Bird {     
+    int legnum=2;  
+    void egg(){};  
+  } 
+  class Ant extends Insect implements  Flyanimal {  
+    public void fly(){  
+       System.out.println("Ant can  fly");  
+    }  
+  } 
+  class Pigeon extends Bird implements  Flyanimal {  
+    public void fly(){  
+       System.out.println("pigeon  can fly");  
+    }  
+    public void egg(){  
+      System.out.println("pigeon  can lay  eggs ");  
+    }  
+  }
+  public class InterfaceDemo{  
+    public static void main(String args[]){  
+      Ant a=new Ant();  
+      a.fly();                                           //Ant can  fly
+      System.out.println("Ant's legs are"+ a.legnum);   //Ant'slegs  are 6
+      Pigeon p= new Pigeon();  
+      p.fly();                                          //pigeon  can fly
+      p.egg();                                          //pigeon  can lay  eggs
+    }  
+  }  
   
-  
+
+
+
+
+
+
   
   
   
