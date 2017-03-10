@@ -95,9 +95,119 @@
         那么子类中方法必须是public。
     （3）在java中，一般来说，变量成员最好是private，对它们的访问可以通过public的方法，在这些方法中可以做些控制以保证数据
         的一致性。这些方法名一般以get和set做为前缀。
-  
-  
-  
+(7)继承
+  继承就是继承父类的遗产，就是使用已存在的类的定义作为基础建立新的类，新类的定义可以增加新的数据和功能，也可以用父类的功能，其
+  使得复用以前的代码十分地方便。
+  用extends来继承
+  class car{
+    int v;//速度
+    void drive(){
+      System.out.print("car速度是" + v);
+    }    
+  }
+  class bus extend car{
+    int p;//人数
+    void carry(){
+      System.out.print("bus载人" + p);
+    }
+    void sum(){
+       System.out.print("bus速度是" + v);
+      System.out.print("bus载人" + p);
+    }
+  }
+  此时测试用例
+  car ca = new car();
+  bus bu = new bus();
+  ca.v = 60;
+  bu.v = 40;
+  bu.p = 20;
+  ca.drive();  car速度是60
+  bu.drive();  car速度是40
+  bu.carry();  bus载人20
+  bu.sum();    bus速度是40,bus载人20
+  子类包含父类的所有成员，但是无法访问父类中被private修饰的成员(变量或函数)
+  注意this和super的使用，用法如下
+  (1)this防止父类中也有p
+  class bus extend car{
+    int p;//人数
+    void carry(){
+      System.out.print("bus载人" + this.p);
+    }
+    void sum(){
+       System.out.print("bus速度是" + v);
+      System.out.print("bus载人" + this.p);
+    }
+  }
+  (2)super直接访问父类中的成员
+  class bus extend car{
+    int p;//人数
+    void carry(){
+      System.out.print("bus载人" + p);
+    }
+    void sum(){
+       System.out.print("bus速度是" + super.v);
+      System.out.print("bus载人" + p);
+    }
+  }
+  (3)this还有一种用法,this.实参
+  class car{
+  int v;
+    void car(int v){ //构造函数
+      this.v = v;
+    }
+  }
+(8)多态（方法的覆盖，重载，重写）
+  在子类继承父类之后，子类就拥有了父类的成员变量和方法，但是可能子类中有与父类同名的变量和方法，同一个类内部，也可以有同名的，参数列表
+  不同的方法，这就是多态，即同一个名字有多种实现状态。
+  多态通过方法的覆盖，重载，重写来实现
+  (a)覆盖---------继承了父类的同名无参函数
+  class car{
+    int v;//速度
+    void drive(){
+      System.out.print("car速度是" + v);
+    }    
+  }
+  class bus extend car{
+    int p;//人数
+    void drive(){
+      System.out.print("bus速度是" + v);
+    }
+    void carry(){
+      System.out.print("bus载人" + p);
+    }
+    void sum(){
+       System.out.print("bus速度是" + v);
+      System.out.print("bus载人" + p);
+    }
+  }
+  car ca = new car();
+  bus bu = new bus();
+  ca.v = 60;
+  bu.v = 40;
+  bu.p = 20;
+  ca.drive();  car速度是60
+  bu.drive();  bus速度是40
+  bu.carry();  bus载人20
+  bu.sum();    bus速度是40,bus载人20
+  (a)重载---------继承了父类的同名有参函数
+  class bus extend car{
+    int p;//人数
+    void drive(){
+      System.out.print("bus速度是" + v);
+    }
+    void drive(int v){
+      System.out.print("bus速度是" + v);
+    }
+    void carry(){
+      System.out.print("bus载人" + p);
+    }
+    void sum(){
+       System.out.print("bus速度是" + v);
+      System.out.print("bus载人" + p);
+    }
+  }
+  测试用例
+  bu.drive(100);输入参数即可
   
   
   
