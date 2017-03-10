@@ -98,6 +98,7 @@
 (7)继承
   继承就是继承父类的遗产，就是使用已存在的类的定义作为基础建立新的类，新类的定义可以增加新的数据和功能，也可以用父类的功能，其
   使得复用以前的代码十分地方便。
+  抽象类(abstract)必须被继承，最终类(final)不能被继承
   用extends来继承
   class car{
     int v;//速度
@@ -189,7 +190,7 @@
   bu.drive();  bus速度是40
   bu.carry();  bus载人20
   bu.sum();    bus速度是40,bus载人20
-  (a)重载---------继承了父类的同名有参函数
+  (b)重载---------继承了父类的同名有参函数
   class bus extend car{
     int p;//人数
     void drive(){
@@ -207,7 +208,31 @@
     }
   }
   测试用例
-  bu.drive(100);输入参数即可
+  bu.drive(100);输入参数即可，区别只是在于参数不同
+  (c)重写-------------当前类的同名方法
+  通过方法的重写，一个类中可以有多个相同名字的方法，由传递给他们参数的类型和个数不同来区分，注意的是，重写的方法是当前类内的同名
+  方法，不是父类中的方法。
+  class bus extend car{
+    int p;//人数
+    void drive(){
+      System.out.print("bus速度是" + v);
+    }
+    void carry(){
+      System.out.print("bus载人" + p);
+    }
+    void carry(int t){
+      System.out.print("bus载人" + t);
+    }
+    void sum(){
+       System.out.print("bus速度是" + v);
+      System.out.print("bus载人" + p);
+    }
+  }
+  carry和carry(int t)区分调用
+(9)接口  
+  java只支持单一继承，为了能够多重继承，我们利用接口实现多重继承
+  接口的含义：
+  
   
   
   
