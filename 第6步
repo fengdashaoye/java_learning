@@ -1,0 +1,4 @@
+6. 学习Java的异常处理，但更重要的是学习什么时候用特殊返回值而不使用异常，什么时候应该抛出异常而不处理异常，知道什么是pokemon catch及其
+危害，了解为什么Java的checked exception是一个糟糕的特性。如果愿意，同时学习一下Java1.7的try-with-resource语句和AutoCloseable接口。
+一、java的异常处理
+  
