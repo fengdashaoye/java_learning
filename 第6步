@@ -1,4 +1,20 @@
 6. 学习Java的异常处理，但更重要的是学习什么时候用特殊返回值而不使用异常，什么时候应该抛出异常而不处理异常，知道什么是pokemon catch及其
 危害，了解为什么Java的checked exception是一个糟糕的特性。如果愿意，同时学习一下Java1.7的try-with-resource语句和AutoCloseable接口。
 一、java的异常处理
-  
+  来，首先对异常有一个大体的了解。
+  异常主要是指一种意想不到处理的情况，你感觉没问题但偏偏有问题。如文件找不到、非法的参数、网络失败让你大骂“我曹”的事件。
+  它发生在程序运行期间，干扰了程序的正常运行。                    |-----stackoverflowerror
+                          |----------------virtualmachinerror|
+            -----    error|                                  |-----outofmemoryerror
+           |              |-----------------AWTerror
+           |
+  throwable|                                                  -----eofException
+           |              |----------------------IOException|
+           |              |                                   -----filenotfoundException
+           ------exception|                                 |------arrithmeticException
+                          |                                 |------missingresourceException
+                          |-----------------runtimeexception|------classnotfoundException
+                                                            |-------nullpointerException
+                                                            |-------illegalArgumentException
+                                                            |-------ArrayindexOutofBoundsException
+                                                            |-------UnkonwnTypeException
