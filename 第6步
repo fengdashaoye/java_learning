@@ -18,3 +18,7 @@
                                                             |-------illegalArgumentException
                                                             |-------ArrayindexOutofBoundsException
                                                             |-------UnkonwnTypeException
+在 Java 中，所有的异常都有一个共同的祖先 Throwable（可抛出）。Throwable 指定代码中可用异常传播机制通过 Java 应用程序传输的任何问题的共性。
+Throwable： 有两个重要的子类：Exception（异常）和 Error（错误），二者都是 Java 异常处理的重要子类，各自都包含大量子类。
+  (1)error
+    此类代表程序自身无法解决的。
