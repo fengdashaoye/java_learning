@@ -21,4 +21,139 @@
 在 Java 中，所有的异常都有一个共同的祖先 Throwable（可抛出）。Throwable 指定代码中可用异常传播机制通过 Java 应用程序传输的任何问题的共性。
 Throwable： 有两个重要的子类：Exception（异常）和 Error（错误），二者都是 Java 异常处理的重要子类，各自都包含大量子类。
   (1)error
-    此类代表程序自身无法解决的错误。
+    此类代表程序自身无法解决的错误。主要是jvm出了问题，上面也说了，栈溢出，内存溢出。
+  (2)exception
+    是程序本身可以处理的异常。(error和exception的区别就是是否可以程序本身可以处理).
+    异常有一个重要子类为runtimeException,RuntimeException 类及其子类表示“JVM 常用操作”引发的错误,如空值对象引用(NullPointerException)
+    除数为0(ArithmeticException)和数组越界(ArrayIndexOutOfBoundException)
+    (a)java异常(包含error和exception)通常分为可查的异常和不可查的异常
+      (i)可查的异常(编译器必须处理的异常),除了RuntimeException及其子类以外，其他的Exception类及其子类都属于可查异常。这种异常
+      的特点是Java编译器会检查它,要么用try-catch-finally捕获它,要么用throw抛出它.
+      (ii)不可查异常(包括runtimeException和error),编译器不强制处理的异常。runtimeException能编译，error不一定。
+    (b)单纯异常(exception)可以分为两类:
+      (i)运行时异常(RuntimeException)如NullPointerException(空指针异常),这类异常是不检查异常，程序可以选择捕捉，也可以不处理，
+       这类异常通常为逻辑上的错误导致的。运行时异常的特点是Java编译器不会检查它，也就是说，当程序中可能出现这类异常，即使没有
+       用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过。
+      (ii)非运行时异常 （编译异常）：是RuntimeException以外的异常，类型上都属于Exception类及其子类。从程序语法角度讲是必须
+      进行处理的异常，如果不处理，程序就不能编译通过。
+    
+    (c)处理异常的机制
+      (i)抛出异常:当一个方法出现错误引发异常时，方法创建异常对象并交付运行时系统，异常对象中包含了异常类型和异常出现时的
+      程序状态等异常信息。运行时系统负责寻找处置异常的代码并执行。
+      (ii) 捕获异常：在方法抛出异常之后，运行时系统将转为寻找合适的异常处理器（exception handler）。
+      
+      对于运行时异常、错误或可查异常，Java技术所要求的异常处理方式有所不同.
+        (i)对于运行时异常，根据经验，java虚拟机能够自行处理。由于运行时异常的不可查性，当然，数组越界，空值指针引用，都不想，但是很难
+        察觉，当然察觉了也就自己改了。这部分java规定，将由Java运行时系统自动抛出，允许应用程序忽略运行时异常。
+        (ii)对于错误(error), 当方法不进行捕捉(try-catch-finally)时,Java允许该方法不做任何抛出声明。因为error是不被允许出现的
+        情况，所以对于合理地程序，不应该对error进行捕捉
+        (iii)对于所有的可查异常，Java规定：一个方法必须捕捉，或者声明抛出方法之外。也就是说，当一个方法选择不捕捉可查异常时，
+        它必须声明将抛出异常。因为该异常是可查的。
+        
+        一个方法所能捕捉的异常，一定是Java代码在某处所抛出的异常。简单地说，异常总是先被抛出，后被捕捉的。
+   (d)捕获异常的语句
+      (i)try-catch
+            try{
+            } catch(type1 id1){
+            }
+            catch(trpe2 id2){
+            }
+            
+            例1  捕捉throw语句抛出的“除数为0”异常
+            public class TestException {  
+                public static void main(String[] args) {  
+                int a = 6;  
+                int b = 0;  
+                try { // try监控区域  
+              
+                  if (b == 0) throw new ArithmeticException(); // 通过throw语句抛出异常  
+                  System.out.println("a/b的值是：" + a / b);  
+                }  
+                catch (ArithmeticException e) { // catch捕捉异常  
+                System.out.println("程序出现异常，变量b不能为0。");  
+                }  
+                System.out.println("程序正常结束。");  
+                }  
+          }
+          运行结果：程序出现异常，变量b不能为0。
+
+                    程序正常结束。
+          例2  捕捉运行时系统自动抛出“除数为0”引发的ArithmeticException异常。
+          public static void main(String[] args) {  
+              int a = 6;  
+              int b = 0;  
+              try {  
+                  System.out.println("a/b的值是：" + a / b);  
+              } catch (ArithmeticException e) {  
+                  System.out.println("程序出现异常，变量b不能为0。");  
+              }  
+              System.out.println("程序正常结束。");  
+            }  
+          }
+          运行结果：程序出现异常，变量b不能为0。
+
+                  程序正常结束。
+      (ii) try－catch-finally语句
+          try {  
+              // 可能会发生异常的程序代码  
+          } catch (Type1 id1) {  
+              // 捕获并处理try抛出的异常类型Type1  
+          } catch (Type2 id2) {  
+              // 捕获并处理try抛出的异常类型Type2  
+          } finally {  
+              // 无论是否发生异常，都将执行的语句块  
+          }  
+          
+          例子
+            public class TestException {  
+               public static void main(String args[]) {  
+               int i = 0;  
+               String greetings[] = { " Hello world !", " Hello World !! ",  
+                    " HELLO WORLD !!!" };  
+               while (i < 4) {  
+                  try {  
+                      // 特别注意循环控制变量i的设计，避免造成无限循环  
+                      System.out.println(greetings[i++]);  
+                  } catch (ArrayIndexOutOfBoundsException e) {  
+                      System.out.println("数组下标越界异常");  
+                  } finally {  
+                      System.out.println("--------------------------");  
+                  }  
+              }  
+          }  
+        }
+        
+        运行结果:
+          Hello world !
+          --------------------------
+          Hello World !!
+          --------------------------
+          HELLO WORLD !!!
+          --------------------------
+          数组下标越界异常
+          --------------------------
+      
+      例5中的try语句这样设计
+      try {  
+      System.out.println (greetings[i]); i++;  
+      }
+      会出现死循环.因为i越界，直接被捕获，i没有在++，所以一直死循环
+      小结:
+        try 块：用于捕获异常。其后可接零个或多个catch块，如果没有catch块，则必须跟一个finally块。
+        catch 块：用于处理try捕获到的异常。
+        finally 块：无论是否捕获或处理异常，finally块里的语句都会被执行。当在try块或catch块中遇到return语句时，finally语句块将在方法返回之前被执行。在以下4种特殊情况下，finally块不会被执行：
+        1）在finally语句块中发生了异常。
+        2）在前面的代码中用了System.exit()退出程序。
+        3）程序所在的线程死亡。
+        4）关闭CPU。
+      
+   (e)抛出异常的语句
+      
+   
+   
+   
+   
+   
+   
+   
+      
