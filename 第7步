@@ -1,3 +1,4 @@
  熟悉Java常用的数据结构，如基本的数组类型，以及泛型容器（java.util.*），尤其是java.util.List<T>接口
  和java.util.ArrayList<T>实现；以及java.util.Map<T,U>接口和java.util.HashMap<T,U>实现。（java1.5以前的没有泛
  型参数的就不用碰了）同时留意一下基本类型int, double等和装箱类型Integer和Double的区别，以及它们是如何自动转换的。
+ 
