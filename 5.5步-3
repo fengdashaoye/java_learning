@@ -1,0 +1,26 @@
+对象与对象引用的区别，注意垃圾回收。
+这部分相当重要，之前一直弄混，如今找到一个好的文档，借此梳理。
+网址:http://blog.sina.com.cn/s/blog_4cd5d2bb0100ve9r.html
+内容:
+  首先定义一个简单的类
+  class Vehicle {
+       int passengers;      
+       int fuelcap;
+       int mpg;
+  }
+  然后一般创建对象都有这句代码: Vehicle veh1 = new Vehicle();
+  按照网址的内容所述，这一句代码包含4个动作
+  1）右边的“new Vehicle”，是以Vehicle类为模板，在堆空间里创建一个Vehicle类对象（也简称为Vehicle对象）。
+  2）末尾的()意味着，在对象创建后，立即调用Vehicle类的构造函数，对刚生成的对象进行初始化。构造函数是肯定有的。
+  如果你没写，Java会给你补上一个默认的构造函数。
+  3）左边的“Vehicle veh1”创建了一个Vehicle类引用变量。所谓Vehicle类引用，就是以后可以用来指向Vehicle对象的对象引用。
+  4）“=”操作符使对象引用指向刚创建的那个Vehicle对象。
+  
+  
+  
+  
+  
+  
+  
+  
+  
