@@ -7,4 +7,6 @@
  Collection---->List----->(Vector \ ArryList \ LinkedList)                             Map------>HashMap
  Collection---->Set------>(HashSet \ LinkedHashSet \ SortedSet)
  
+ interfaces        hashtable             resizable array               tree             linked list         hash table + linked list
+ Set               HashSet                                             treeset
  
