@@ -2,3 +2,9 @@
  和java.util.ArrayList<T>实现；以及java.util.Map<T,U>接口和java.util.HashMap<T,U>实现。（java1.5以前的没有泛
  型参数的就不用碰了）同时留意一下基本类型int, double等和装箱类型Integer和Double的区别，以及它们是如何自动转换的。
  
+ java 常用的数据结构主要分为collection和map两种接口，常用的数据结构主要是继承来自这些接口的数据结构类。
+ Collection---->Collections                                                            Map----->SortedMap------>TreeMap
+ Collection---->List----->(Vector \ ArryList \ LinkedList)                             Map------>HashMap
+ Collection---->Set------>(HashSet \ LinkedHashSet \ SortedSet)
+ 
+ 
