@@ -8,5 +8,143 @@
  Collection---->Set------>(HashSet \ LinkedHashSet \ SortedSet)
  
  interfaces        hashtable             resizable array               tree             linked list         hash table + linked list
- Set               HashSet                                             treeset
+ Set               HashSet                                             Treeset                              LinkedHashSet
+ List                                    ArrayList                                      LinkedList
+ Queue
+ Map               HashMap                                             TreeMap                              LinkedHashMap
  
+ 
+ (1)java vector(java.util.vector)
+     可实现自动增长的对象数组。嗯，动态数组。
+     向量类提供了三种构造方法： 
+     public vector() 
+     public vector(int initialcapacity,int capacityIncrement) 
+     public vector(int initialcapacity)
+     使用第一种方法系统会自动对向量进行管理，若使用后两种方法。则系统将根据参数，initialcapacity设定向量对象的
+     容量（即向量对象可存储数据的大小），当真正存放的数据个数超过容量时。系统会扩充向量对象存储容量。
+     参数capacityincrement给定了每次扩充的扩充值。当capacityincrement为0的时候，则没次扩充一倍，利用这个功能可以优化
+     存储。在Vector类中提供了各种方法方便用户的使用
+     插入功能，插入整数1时不要直接v1.addElement(1)
+     (a)Vector v1 = new Vector(); 
+        Integer integer1 = new Integer(1); 
+        v1.addElement(integer1); 
+     覆盖功能
+     (b)public final synchronized void setElementAt(Object obj,int index) 
+        将index处的对象设置成obj，原来的对象将被覆盖。
+        vector里面存的是对象类型。
+     (c)public final synchronized void insertElementAt(Object obj,int index) 
+        在index指定的位置插入obj，原来对象以及此后的对象依次往后顺延。
+     删除功能
+     (d) public final synchronized void removeElement(Object obj) 
+        从向量中删除obj,若有多个存在，则从向量头开始试，删除找到的第一个与obj相同的向量成员。 
+     (e)public final synchronized void removeAllElement(); 
+        删除向量所有的对象 
+     (f)public fianl synchronized void removeElementAt(int index) 
+        删除index所指的地方的对象
+     查找功能
+     (g)public final int indexOf(Object obj) 
+        从向量头开始搜索obj,返回所遇到的第一个obj对应的下标，若不存在此obj,返回-1. 
+     (h)public final synchronized int indexOf(Object obj,int index) 
+        从index所表示的下标处开始搜索obj. 
+     (i)public final int lastindexOf(Object obj) 
+        从向量尾部开始逆向搜索obj. 
+     (k)public final synchornized int lastIndex(Object obj,int index) 
+        从index所表示的下标处由尾至头逆向搜索obj. 
+     (l)public final synchornized firstElement() 
+        获取向量对象中的首个obj 
+     (m)public final synchornized Object lastElement() 
+        获取向量对象的最后一个obj
+     (n)类vector定义了方法 
+        public final int size(); 
+        此方法用于获取向量元素的个数。它们返回值是向量中实际存在的元素个数，而非向量容量。可以调用方法capacity()来获取容量值。
+     (o)取出元素
+        s.elementAt(1) 返回的是第二个元素
+(2)java ArrayList(java.util.*)  
+    它是一个数组队列，提供了相关的添加、删除、修改、遍历等功能,提供了随机访问功能,ArrayList 本身就没有去重的功能
+    ArrayList的API
+       // Collection中定义的API
+       ArrayList list = new ArrayList();
+    boolean             add(E object)                                   list.add(1)   
+    
+    boolean             addAll(Collection<? extends E> collection)      ArrayList<Integer> arrlist = new ArrayList<Integer>();
+                                                                        arrlist.add(2);
+                                                                        arrlist.add(3);
+                                                                        ArrayList<Integer> arrlist2 = new ArrayList<Integer>();
+                                                                        arrlist2.add(2);
+                                                                        arrlist2.add(3);
+                                                                        arrlist.addAll(arrlist2);
+                                                                        在小数据量时，for循环效率高，大数据量时addAll方法效率高：
+                                                                        1.使用内存拷贝，移动数据。
+                                                                        2.本地函数，执行效率高
+                                                                        
+    void                clear()                                         list.clear();后清空所有元素，size()为0
+    
+    boolean             contains(Object object)                         如果此列表包含指定的元素，此方法返回true。
+    
+    boolean             containsAll(Collection<?> collection)           containsAll方法用于判断列表中是否包含指定collection的所有元素。
+                                                                        arrlist2.containsAll(arrlist);
+                                                                        
+    boolean             equals(Object object)                           ArrayList的equals方法，两个size()相等的list，在相同order中的
+                                                                        对象相等，则两个lisit相等，如果只想比较两个 list中的元素是否相等，
+                                                                        不考虑order，那么先用Collections.sort()方法对list进行排序再进
+                                                                        行比较。。。
+                                                                        
+    int                 hashCode()                                      这个貌似hashset用的多(待定) 
+     
+    boolean             isEmpty()                                       判定是否为空
+    
+    Iterator<E>         iterator()                                      迭代器
+    
+    boolean             remove(Object object)                           在项目开发中，我们可能往往需要动态的删除ArrayList中的一些元素。
+                                                                        这种方法是错误的
+                                                                        for(int i = 0 , len= list.size();i<len;++i){  
+                                                                           if(list.get(i)==XXX){  
+                                                                                   list.remove(i);  
+                                                                           }  
+                                                                        }
+                                                                        因为你删除了元素，但是未改变迭代的下标，这样当迭代到最后一个的时候就
+                                                                        会抛异常咯。
+                                                                        for(int i = 0 , len= list.size();i<len;++i){  
+                                                                            if(list.get(i)==XXX){  
+                                                                                 list.remove(i);  
+                                                                                 --len;//减少一个  
+                                                                                 --i;//多谢deny_guoshou指正，如果不加会出现评论1楼所说的情况。  
+                                                                            }  
+                                                                         }
+                                                                         
+    boolean             removeAll(Collection<?> collection)                list.removeAll(sub2); 
+                                                                          是删出list中包含sub2中的元素的。
+    boolean             retainAll(Collection<?> collection)
+    int                 size()
+    <T> T[]             toArray(T[] array)                               第二种方法是将list转化为你所需要类型的数组,
+                                                                         String[] array =new String[list.size()];
+                                                                         list.toArray(array);
+    Object[]            toArray()                                        是将list直接转为Object[] 数组；
+    // AbstractCollection中定义的API
+    void                add(int location, E object)
+    boolean             addAll(int location, Collection<? extends E> collection)
+    E                   get(int location)
+    int                 indexOf(Object object)
+    int                 lastIndexOf(Object object)
+    ListIterator<E>     listIterator(int location)
+    ListIterator<E>     listIterator()
+    E                   remove(int location)
+    E                   set(int location, E object)
+    List<E>             subList(int start, int end)
+    // ArrayList新增的API
+    Object               clone()
+    void                 ensureCapacity(int minimumCapacity)
+    void                 trimToSize()
+    void                 removeRange(int fromIndex, int toIndex)
+   
+ (3)LinkedList
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+        
