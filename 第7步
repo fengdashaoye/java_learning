@@ -274,3 +274,21 @@ TreeSet
         System.out.println("TreeSet 顺序:\n"+ts);
         TreeSet 顺序:
 [A, B, C, D, E, F]
+
+
+
+java中栈类的使用
+   2-->public boolean empty()测试堆栈是否为空;
+ 
+   3-->public E pop()移除堆栈顶部的对象，并作为此函数的值返回该对象。 
+ 
+   4-->public E push(E item)把项压入堆栈顶部
+ 
+   5-->public E peek()查看堆栈顶部的对象，但不从堆栈中移除它。 
+ 
+   6-->public boolean empty()测试堆栈是否为空
+
+   Stack<Character> sk = new Stack<Character>();
+   
+
+
