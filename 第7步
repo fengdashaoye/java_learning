@@ -138,13 +138,139 @@
     void                 removeRange(int fromIndex, int toIndex)
    
  (3)LinkedList
+   网页:http://blog.csdn.net/jdsjlzx/article/details/41654295
+   LinkedList类是双向列表,列表中的每个节点都包含了对前一个和后一个元素的引用.
+   LinkedList<String> lList = new LinkedList<String>();
+   添加:
+      lList.add("1");
+   第一个和最后一个元素
+      lList.getFirst()
+      lList.getLast()
+   获取链表元素
+      for (String str: lList) {  
+        System.out.println(str);  
+      }  
+   也可以把链表当初栈或者队列来处理:
+      public boolean addFirst(Object element)
+      public boolean addLast(Object element) 
+  删除元素 
+       list.removeFirst();  
+       list.removeLast();
+  删掉所有元素：清空LinkedList
+    lList.clear();  
+  根据范围删除列表元素 
+    lList.subList(2, 5).clear();
+  删除链表的特定元素
+    lList.remove("2")删除元素值=2的元素
+    lList.remove(2);  //删除第2个元素，链表
+  将LinkedList转换为数组,数组长度为0
+    String[] my = theList.toArray(new String[0])
+  将LinkedList转换为数组，数组长度为链表长度
+    String[] my = theList.toArray(new String[theList.size()]);
+  查找位置
+    .indexOf("2")
+  替换元素
+    lList.set(3, "Replaced");//使用set方法替换元素，方法的第一个参数是元素索引，后一个是替换值  
+  确认链表是否存在特定元素  
+    lList.contains("4")
+  
+
+
+Map:
+  HashMap
+  当我们把 Java 对象放入数组之时，并不是真正的把 Java 对象放入数组中，只是把对象的引用放入数组中，每个数组元素都是一个引用变量。
+   HashMap<String, double> hashMap = new HashMap<String, double>(); 
+  存储:
+  map.put("语文" , 80.0);   
+  map.put("数学" , 89.0);   
+  map.put("英语" , 78.2);
+  读取:
+  .get(key)
+  遍历
+  第一种:
+　　Map map = new HashMap();
+　　Iterator iter = map.entrySet().iterator();
+　　while (iter.hasNext()) {
+　　Map.Entry entry = (Map.Entry) iter.next();
+　　Object key = entry.getKey();
+　　Object val = entry.getValue();
+　　}
+　　效率高,以后一定要使用此种方式！
+   第二种:
+　　Map map = new HashMap();
+　　Iterator iter = map.keySet().iterator();
+　　while (iter.hasNext()) {
+　　Object key = iter.next();
+　　Object val = map.get(key);
+　　}
+　　效率低,以后尽量少使用！
+
+ TreeMap
+   网址:http://blog.csdn.net/chenssy/article/details/26668941
+   hashmap是没有顺序的，而treemap则是按顺序排列的哦！！
+   HashMap通过hashcode对其内容进行快速查找，而TreeMap中所有
+   的元素都保持着某种固定的顺序，如果你需要得到一个有序的结果你就应该使用TreeMap（HashMap中元素的排列顺序是不固定的）。
+   红黑树(待定)
  
-    
-    
-    
-    
-    
-    
-    
-    
-        
+Set
+   HashSet
+   set中不能存储重复的元素，可以存储null元素。如果需要存储多个重复元素，需要使用List。
+   它不允许出现重复元素；
+   不保证和政集合中元素的顺序
+   允许包含值为null的元素，但最多只能有一个null元素。
+   boolean	add(E o) 
+          如果此集合中还不包含指定元素，则添加指定元素。
+ void	clear() 
+          从此集合中移除所有元素。
+ Object	clone() 
+          返回此 HashSet 实例的浅表复制：并没有克隆这些元素本身。
+ boolean	contains(Object o) 
+          Returns 如果此集合不包含指定元素，则返回 true。
+ boolean	isEmpty() 
+          如果此集合不包含任何元素，则返回 true。
+ Iterator<E>	iterator() 
+          返回对此集合中元素进行迭代的迭代器。
+ boolean	remove(Object o) 
+          如果指定元素存在于此集合中，则将其移除。
+ int	size() 
+          返回此集合中的元素的数量（集合的容量）     
+
+LinkedHashSet
+  类HashSet和LinkedHashSet都是接口Set的实现，两者都不能保存重复的数据。主要区别是HashSet不保证集合中元素的顺序，即不能保证迭代的顺序与插入的顺序一致。
+  而LinkedHashSet按照元素插入的顺序进行迭代，即迭代输出的顺序与插入的顺序保持一致。
+  HashSet<String> hs = new HashSet<String>();  
+        hs.add("B");  
+        hs.add("A");  
+        hs.add("D");  
+        hs.add("E");  
+        hs.add("C");  
+        hs.add("F");  
+        System.out.println("HashSet 顺序:\n"+hs);  
+        HashSet 顺序:
+       [D, E, F, A, B, C]
+       
+  LinkedHashSet<String> lhs = new LinkedHashSet<String>();  
+        lhs.add("B");  
+        lhs.add("A");  
+        lhs.add("D");  
+        lhs.add("E");  
+        lhs.add("C");  
+        lhs.add("F");  
+        System.out.println("LinkedHashSet 顺序:\n"+lhs);  
+         LinkedHashSet 顺序:
+        [B, A, D, E, C, F]
+  
+TreeSet
+     HashSet：哈希表是通过使用称为散列法的机制来存储信息的，元素并没有以某种特定顺序来存放；  
+ *    LinkedHashSet：以元素插入的顺序来维护集合的链接表，允许以插入的顺序在集合中迭代；  
+ *    TreeSet：提供一个使用树结构存储Set接口的实现，对象以升序顺序存储，访问和遍历的时间很快。
+ TreeSet<String> ts = new TreeSet<String>();  
+        ts.add("B");  
+        ts.add("A");  
+        ts.add("D");  
+        ts.add("E");  
+        ts.add("C");  
+        ts.add("F");  
+        System.out.println("TreeSet 顺序:\n"+ts);
+        TreeSet 顺序:
+[A, B, C, D, E, F]
