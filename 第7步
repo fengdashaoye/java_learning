@@ -180,6 +180,8 @@ Map:
   HashMap
   当我们把 Java 对象放入数组之时，并不是真正的把 Java 对象放入数组中，只是把对象的引用放入数组中，每个数组元素都是一个引用变量。
    HashMap<String, double> hashMap = new HashMap<String, double>(); 
+   hashmap.containsKey()
+   hashmap.get()
   存储:
   map.put("语文" , 80.0);   
   map.put("数学" , 89.0);   
