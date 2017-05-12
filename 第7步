@@ -4,7 +4,7 @@
  
  java 常用的数据结构主要分为collection和map两种接口，常用的数据结构主要是继承来自这些接口的数据结构类。
  Collection---->Collections                                                            Map----->SortedMap------>TreeMap
- Collection---->List----->(Vector \ ArryList \ LinkedList)                             Map------>HashMap
+ Collection---->List----->(Vector \ ArryList \ LinkedList)                             Map------>HashMap----->linkedhashmap
  Collection---->Set------>(HashSet \ LinkedHashSet \ SortedSet)
  
  interfaces        hashtable             resizable array               tree             linked list         hash table + linked list
@@ -13,7 +13,8 @@
  Queue
  Map               HashMap                                             TreeMap                              LinkedHashMap
  
- 
+ HashMap无序
+ LinkedHashMap有序
  (1)java vector(java.util.vector)
      可实现自动增长的对象数组。嗯，动态数组。
      向量类提供了三种构造方法： 
